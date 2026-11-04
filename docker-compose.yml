@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: netcare-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: netcare_secret_password_2026
+      POSTGRES_DB: netcare_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - netcare_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d netcare_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  web:
+    build: .
+    container_name: netcare-web
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://postgres:netcare_secret_password_2026@db:5432/netcare_db
+      SECRET_KEY: netcare-super-secret-jwt-key-for-development-change-in-production-2026
+      ALGORITHM: HS256
+      ACCESS_TOKEN_EXPIRE_MINUTES: 1440
+      OUTAGE_WINDOW_MINUTES: 30
+      OUTAGE_TICKET_THRESHOLD: 3
+    ports:
+      - "8000:8000"
+
+volumes:
+  netcare_pgdata:
+    driver: local

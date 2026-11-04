@@ -1,0 +1,25 @@
+export const API_BASE = '/api/v1';
+
+export const USER_ROLES = {
+  ADMIN: 'ADMIN',
+  AGENT: 'AGENT',
+  TECHNICIAN: 'TECHNICIAN',
+  CUSTOMER: 'CUSTOMER'
+};
+
+export const TICKET_PRIORITIES = {
+  CRITICAL: 'CRITICAL',
+  HIGH: 'HIGH',
+  MEDIUM: 'MEDIUM',
+  LOW: 'LOW'
+};
+
+export const TICKET_STATUSES = {
+  NEW: 'NEW',
+  ASSIGNED: 'ASSIGNED',
+  IN_PROGRESS: 'IN_PROGRESS',
+  WAITING: 'WAITING',
+  RESOLVED: 'RESOLVED',
+  CLOSED: 'CLOSED',
+  REOPENED: 'REOPENED'
+};

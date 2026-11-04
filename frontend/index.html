@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NetCare – ISP Customer Support & Complaint Management</title>
+  <link rel="stylesheet" href="/static/css/variables.css">
+  <link rel="stylesheet" href="/static/css/base.css">
+  <link rel="stylesheet" href="/static/css/components.css">
+  <link rel="stylesheet" href="/static/css/layouts.css">
+</head>
+<body>
+  <div id="toast-container"></div>
+  <div id="modal-container"></div>
+
+  <div id="app-layout">
+    <!-- Sidebar -->
+    <aside id="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-icon">NC</div>
+        <div>
+          <div class="brand-title">NetCare</div>
+          <div class="brand-subtitle">Smart ISP Support</div>
+        </div>
+      </div>
+      <nav class="sidebar-nav" id="sidebar-links">
+        <!-- Rendered dynamically by sidebar.js based on role -->
+      </nav>
+      <div class="sidebar-footer">
+        <button id="btn-sidebar-logout" class="btn btn-outline w-full text-xs" style="color: #94A3B8; border-color: rgba(255,255,255,0.1);">
+          Sign Out
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div id="main-wrapper">
+      <header id="navbar">
+        <div class="navbar-left">
+          <button id="sidebar-toggle" class="navbar-toggle" title="Toggle Navigation">☰</button>
+          <h1 id="page-title" class="page-title">Dashboard</h1>
+        </div>
+        <div class="navbar-right" id="navbar-user-area">
+          <!-- Rendered dynamically by navbar.js -->
+        </div>
+      </header>
+
+      <main id="app-content">
+        <!-- Dynamic Views Injected Here -->
+      </main>
+    </div>
+  </div>
+
+  <script type="module" src="/static/js/app.js"></script>
+</body>
+</html>

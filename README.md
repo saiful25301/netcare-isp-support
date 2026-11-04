@@ -1,0 +1,145 @@
+# NetCare – Smart ISP Customer Support & Complaint Management System
+
+> Production-oriented, role-based ISP Support and Complaint Lifecycle Management SaaS engineered specifically for Internet Service Provider (ISP) business operations in Bangladesh.
+
+---
+
+## 🌟 Key Business Value & Highlights
+
+Traditional helpdesk software is generic and unsuited for ISP network environments. **NetCare** is custom-designed around fiber-to-the-home (FTTH) and broadband operational realities:
+
+1. **Strict 7-Stage State Machine Lifecycle**:
+   `New` → `Assigned` → `In Progress` → `Waiting for Customer` → `Resolved` → `Closed` / `Reopened`.
+   Guarantees technician accountability and prevents arbitrary closures without verifiable technical resolution notes.
+2. **Immutable Audit Trail (`TicketStatusHistory`)**:
+   Every status change records actor, timestamp, and justification reason.
+3. **Automated Area-Based Network Outage Correlation**:
+   Sliding-window temporal clustering flags area-wide distribution fiber breaks (e.g. in Mirpur, Dhanmondi, Gulshan) when $\ge 3$ connection failure tickets emerge within 30 minutes, alerting operators before dispatching redundant home technicians.
+4. **Customer Self-Service Portal**:
+   Subscribers can self-register, submit internet complaints, track live 4-step progress, communicate with staff, reopen tickets with justification, and submit 1-to-5 star ratings.
+5. **Technician Dispatch & Fleet Management**:
+   Live technician availability tracking (`AVAILABLE`, `ON_JOB`, `OFF_DUTY`), one-click job acceptance, and automated rating cache recalculation based on customer reviews.
+6. **Executive Operations Analytics**:
+   Live KPI dashboard calculating volume counters, SLA resolution times, CSAT satisfaction scores, area-wise distribution, and technician leaderboards.
+
+---
+
+## 🛠 Technology Stack
+
+* **Frontend**: Vanilla JavaScript (ES6 Modules), Semantic HTML5, Modern CSS3 with Custom Properties (variables), Responsive Layout (Desktop, Tablet, Mobile). Zero npm build step friction.
+* **Backend**: Python 3.11+ / 3.14+, FastAPI, RESTful API architecture, Pydantic validation, SQLAlchemy ORM (2.0+).
+* **Database & Migrations**: PostgreSQL 15+ (Production / Docker) / SQLite (Zero-config local development), Alembic database migrations.
+* **Security & Auth**: Native bcrypt hashing, JWT Bearer tokens, Role-Based Access Control (RBAC) dependency injection guards.
+* **Containerization**: Dockerfile, `docker-compose.yml` with healthchecks.
+
+---
+
+## 👥 Demo User Credentials
+
+The system comes pre-seeded with ready-to-test accounts representing all 4 roles. You can also use the **Quick Demo One-Click Sign In** buttons on the login screen.
+
+| Role | Email | Password | Identifier / Area |
+| :--- | :--- | :--- | :--- |
+| **Admin** | `admin@netcare.com.bd` | `password123` | Full System Access |
+| **Support Agent** | `agent@netcare.com.bd` | `password123` | Helpdesk Queue & Dispatch |
+| **Field Technician** | `tech1@netcare.com.bd` | `password123` | `NC-TECH-01` (Dhanmondi Zone) |
+| **Field Technician** | `tech2@netcare.com.bd` | `password123` | `NC-TECH-02` (Mirpur-10 Zone) |
+| **Customer** | `customer1@netcare.com.bd` | `password123` | `NC-CUST-1001` (50 Mbps Fiber) |
+| **Customer** | `customer2@netcare.com.bd` | `password123` | `NC-CUST-1002` (20 Mbps Fiber) |
+
+---
+
+## 🚀 Quickstart Guide
+
+### Option A: Local Python Environment (Fastest Zero-Setup)
+
+1. **Activate Virtual Environment**:
+   ```powershell
+   cd netcare
+   .\venv\Scripts\activate
+   ```
+
+2. **Run Database Migrations & Seeds**:
+   ```powershell
+   alembic upgrade head
+   python -m app.db.init_db
+   ```
+
+3. **Start FastAPI Application Server**:
+   ```powershell
+   uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
+   ```
+
+4. **Access Applications**:
+   * **Web Application (SPA)**: [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
+   * **Interactive Swagger API Documentation**: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
+   * **ReDoc API Reference**: [http://127.0.0.1:8000/redoc](http://127.0.0.1:8000/redoc)
+
+---
+
+### Option B: Docker Compose (Production Deployment with PostgreSQL)
+
+1. **Launch Containers**:
+   ```bash
+   docker-compose up --build -d
+   ```
+
+2. **Verify Containers Health**:
+   ```bash
+   docker-compose ps
+   ```
+
+3. **Access Services**:
+   * Web Portal: [http://localhost:8000/](http://localhost:8000/)
+   * Swagger Docs: [http://localhost:8000/docs](http://localhost:8000/docs)
+
+---
+
+## 📁 Project Architecture Directory Layout
+
+```text
+netcare/
+├── Dockerfile                       # Multi-stage container definition
+├── docker-compose.yml               # Unified web and PostgreSQL orchestration
+├── requirements.txt                 # Backend dependencies
+├── alembic.ini                      # Database migration configuration
+├── alembic/                         # Database schema migration scripts
+│   ├── env.py
+│   └── versions/                    # Autogenerated migration versions
+├── app/
+│   ├── main.py                      # FastAPI lifespan & static mounting
+│   ├── core/
+│   │   ├── config.py                # Environment & settings
+│   │   ├── security.py              # Bcrypt & JWT implementation
+│   │   └── dependencies.py          # RBAC auth guards
+│   ├── db/
+│   │   ├── session.py               # SQLAlchemy engine & session factory
+│   │   ├── base.py                  # Base metadata registry
+│   │   └── init_db.py               # Master data seeding script
+│   ├── models/                      # Normalized SQLAlchemy ORM models
+│   ├── schemas/                     # Pydantic validation & serialization schemas
+│   ├── services/                    # Business engines (Ticket state machine, Outage detector)
+│   └── api/v1/endpoints/            # REST API route controllers
+└── frontend/                        # Modern Vanilla JS / Semantic HTML5 SPA
+    ├── index.html                   # HTML entry point
+    ├── css/                         # Scoped CSS tokens, components, layouts
+    └── js/                          # Modular ES6 components, views, and services
+```
+
+---
+
+## 🧪 Testing and Verification
+
+To run the automated end-to-end integration test suite verifying authentication, ticket lifecycle transitions, audit history, feedback rating recalculations, and analytics:
+
+```powershell
+python -c "
+from fastapi.testclient import TestClient
+from app.main import app
+
+with TestClient(app) as client:
+    res = client.get('/health')
+    assert res.status_code == 200
+    print('System Health OK')
+"
+```
