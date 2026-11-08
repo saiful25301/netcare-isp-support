@@ -24,7 +24,7 @@ COPY alembic alembic
 COPY app app
 COPY frontend frontend
 
-EXPOSE 10000
+EXPOSE 8000
 
-# Start FastAPI server with Render dynamic port support
-CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-10000}"]
+# Start FastAPI server
+CMD ["sh", "-c", "python -m uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-10000}"]
