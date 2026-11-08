@@ -26,5 +26,5 @@ COPY frontend frontend
 
 EXPOSE 10000
 
-# Start FastAPI server using python -m uvicorn with dynamic port support
-CMD ["sh", "-c", "python -m uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-10000}"]
+# Start FastAPI server using python3 -m uvicorn with Render dynamic port support
+CMD ["sh", "-c", "python3 -m uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-10000}"]
