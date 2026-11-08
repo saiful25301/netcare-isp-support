@@ -7,7 +7,7 @@ export async function renderTechniciansView(container) {
   const isAdmin = auth.getRole() === 'ADMIN';
 
   container.innerHTML = `
-    <div class="flex items-center justify-between" style="margin-bottom: 1.25rem;">
+    <div class="page-header-flex">
       <div>
         <h2 class="text-xl font-bold">Technician Fleet & Dispatch</h2>
         <p class="text-sm text-muted">Monitor technician field availability, workloads, and dispatch assignments</p>

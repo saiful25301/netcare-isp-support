@@ -12,22 +12,24 @@
 <body>
   <div id="toast-container"></div>
   <div id="modal-container"></div>
+  <div id="sidebar-overlay" class="sidebar-overlay"></div>
 
   <div id="app-layout">
     <!-- Sidebar -->
     <aside id="sidebar">
       <div class="sidebar-brand">
         <div class="brand-icon">NC</div>
-        <div>
+        <div class="brand-info">
           <div class="brand-title">NetCare</div>
           <div class="brand-subtitle">Smart ISP Support</div>
         </div>
+        <button id="sidebar-close-btn" class="sidebar-close-btn" title="Close navigation" aria-label="Close navigation">✕</button>
       </div>
       <nav class="sidebar-nav" id="sidebar-links">
         <!-- Rendered dynamically by sidebar.js based on role -->
       </nav>
       <div class="sidebar-footer">
-        <button id="btn-sidebar-logout" class="btn btn-outline w-full text-xs" style="color: #94A3B8; border-color: rgba(255,255,255,0.1);">
+        <button id="btn-sidebar-logout" class="btn w-full text-xs" title="Sign out of NetCare">
           Sign Out
         </button>
       </div>

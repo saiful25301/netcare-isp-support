@@ -3,7 +3,7 @@ import { toast } from '../services/toast.js';
 
 export async function renderAdminAnalyticsView(container) {
   container.innerHTML = `
-    <div class="flex items-center justify-between" style="margin-bottom: 1.5rem;">
+    <div class="page-header-flex">
       <div>
         <h2 class="text-xl font-bold">Executive Operations & Analytics Dashboard</h2>
         <p class="text-sm text-muted">Real-time ISP operational health, customer satisfaction, and dispatch metrics</p>

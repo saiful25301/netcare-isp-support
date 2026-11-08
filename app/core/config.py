@@ -1,5 +1,6 @@
 import os
 from typing import List
+from pydantic import model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 # Base directory of the repository (netcare root)
@@ -12,7 +13,7 @@ class Settings(BaseSettings):
     API_V1_STR: str = "/api/v1"
 
     # Database
-    DATABASE_URL: str = f"sqlite:///{os.path.join(BASE_DIR, 'netcare.db')}"
+    DATABASE_URL: str = f"sqlite:///{os.path.join(BASE_DIR, 'netcare.db').replace(os.sep, '/')}"
 
     # Security
     SECRET_KEY: str = "netcare-super-secret-jwt-key-for-development-change-in-production-2026"
@@ -33,6 +34,14 @@ class Settings(BaseSettings):
         "http://localhost:5000",
         "*"
     ]
+
+    @model_validator(mode="after")
+    def resolve_sqlite_path(self):
+        if self.DATABASE_URL.startswith("sqlite:///."):
+            rel = self.DATABASE_URL[11:]
+            abs_path = os.path.normpath(os.path.join(BASE_DIR, rel.lstrip("/\\"))).replace(os.sep, "/")
+            self.DATABASE_URL = f"sqlite:///{abs_path}"
+        return self
 
     model_config = SettingsConfigDict(
         env_file=os.path.join(BASE_DIR, ".env"),

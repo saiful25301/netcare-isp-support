@@ -5,7 +5,7 @@ import { modal } from '../components/modal.js';
 
 export async function renderCustomersView(container) {
   container.innerHTML = `
-    <div class="flex items-center justify-between" style="margin-bottom: 1.25rem;">
+    <div class="page-header-flex">
       <div>
         <h2 class="text-xl font-bold">Customer Management</h2>
         <p class="text-sm text-muted">Manage ISP customer subscriptions, line assignments, and accounts</p>

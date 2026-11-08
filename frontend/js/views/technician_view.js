@@ -113,12 +113,12 @@ export async function renderTechnicianJobsView(container) {
               </div>
 
               <!-- Actions on ticket -->
-              <div class="flex items-center justify-between" style="margin-top: 1rem; border-top: 1px solid var(--color-border); padding-top: 0.75rem;">
+              <div class="flex items-center justify-between flex-wrap gap-2" style="margin-top: 1rem; border-top: 1px solid var(--color-border); padding-top: 0.75rem;">
                 <a href="#/ticket/${t.ticket_id}" class="btn btn-outline btn-sm">
                   Open Dossier & Chat
                 </a>
 
-                <div class="flex gap-2">
+                <div class="flex flex-wrap gap-2">
                   ${isAssigned ? `
                     <button class="btn btn-primary btn-sm btn-start-job" data-code="${t.ticket_id}">
                       ⚡ Start Diagnostics

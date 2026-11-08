@@ -7,7 +7,7 @@ export async function renderOutagesView(container) {
   const isAdmin = auth.getRole() === 'ADMIN' || auth.getRole() === 'AGENT';
 
   container.innerHTML = `
-    <div class="flex items-center justify-between" style="margin-bottom: 1.25rem;">
+    <div class="page-header-flex">
       <div>
         <h2 class="text-xl font-bold">Network Outage Correlation Monitor</h2>
         <p class="text-sm text-muted">Automated cluster detection flags area-wide fiber breaks and switch failures</p>

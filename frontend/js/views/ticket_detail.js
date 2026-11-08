@@ -37,7 +37,7 @@ export async function renderTicketDetailView(container, ticketId) {
         <div class="card" style="margin-bottom: 1.25rem;">
           <div class="card-header" style="flex-wrap: wrap; gap: 1rem;">
             <div>
-              <div class="flex items-center gap-3">
+              <div class="flex items-center flex-wrap gap-2">
                 <h2 class="text-2xl font-bold" style="color: var(--color-primary); font-family: monospace;">${t.ticket_id}</h2>
                 ${renderPriorityBadge(t.priority)}
                 ${renderStatusBadge(t.status)}
@@ -49,7 +49,7 @@ export async function renderTicketDetailView(container, ticketId) {
             </div>
 
             <!-- Contextual Action Buttons -->
-            <div class="flex gap-2" id="ticket-actions-bar">
+            <div class="flex flex-wrap gap-2" id="ticket-actions-bar">
               ${isStaff ? `
                 <button id="btn-assign-tech" class="btn btn-primary btn-sm">🛠 Assign Technician</button>
                 <button id="btn-change-priority" class="btn btn-outline btn-sm">⚙ Change Priority</button>

@@ -23,12 +23,12 @@ export function renderNavbar(pageTitle = 'Dashboard') {
   userArea.innerHTML = `
     <div class="user-profile-badge">
       <div class="user-avatar">${initials}</div>
-      <div class="flex flex-col" style="line-height: 1.15;">
-        <span class="text-xs font-semibold">${user.full_name}</span>
-        <div style="margin-top: 2px;">${renderRoleBadge(user.role)}</div>
+      <div class="flex flex-col user-info-col" style="line-height: 1.15;">
+        <span class="text-xs font-semibold user-name-label">${user.full_name}</span>
+        <div class="user-role-badge-container" style="margin-top: 2px;">${renderRoleBadge(user.role)}</div>
       </div>
     </div>
-    <button id="btn-navbar-logout" class="btn btn-outline btn-sm" title="Sign Out">
+    <button id="btn-navbar-logout" class="btn btn-outline btn-sm btn-logout" title="Sign Out">
       Sign Out
     </button>
   `;

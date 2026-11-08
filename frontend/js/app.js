@@ -11,15 +11,43 @@ class AppRouter {
     this.contentContainer = document.getElementById('app-content');
     this.sidebar = document.getElementById('sidebar');
     this.navbar = document.getElementById('navbar');
+    this.overlay = document.getElementById('sidebar-overlay');
+  }
+
+  closeSidebar() {
+    if (this.sidebar) this.sidebar.classList.remove('open');
+    if (this.overlay) this.overlay.classList.remove('active');
+  }
+
+  openSidebar() {
+    if (this.sidebar) this.sidebar.classList.add('open');
+    if (this.overlay) this.overlay.classList.add('active');
+  }
+
+  toggleSidebar() {
+    if (this.sidebar && this.sidebar.classList.contains('open')) {
+      this.closeSidebar();
+    } else {
+      this.openSidebar();
+    }
   }
 
   init() {
     // Mobile toggle
     const toggleBtn = document.getElementById('sidebar-toggle');
     if (toggleBtn) {
-      toggleBtn.onclick = () => {
-        this.sidebar.classList.toggle('open');
-      };
+      toggleBtn.onclick = () => this.toggleSidebar();
+    }
+
+    // Sidebar close button
+    const closeBtn = document.getElementById('sidebar-close-btn');
+    if (closeBtn) {
+      closeBtn.onclick = () => this.closeSidebar();
+    }
+
+    // Overlay click closes sidebar
+    if (this.overlay) {
+      this.overlay.onclick = () => this.closeSidebar();
     }
 
     // Sidebar sign out button
@@ -53,7 +81,8 @@ class AppRouter {
     // Authenticated state: ensure layout components are visible
     if (this.sidebar) this.sidebar.style.display = 'flex';
     if (this.navbar) this.navbar.style.display = 'flex';
-    this.sidebar.classList.remove('open');
+    this.closeSidebar();
+    window.scrollTo({ top: 0, behavior: 'instant' });
 
     // Default route if empty
     if (!hash || hash === '#/') {

@@ -9,7 +9,7 @@ export async function renderTicketListView(container) {
   const isStaff = role === 'ADMIN' || role === 'AGENT';
 
   container.innerHTML = `
-    <div class="flex items-center justify-between" style="margin-bottom: 1.25rem;">
+    <div class="page-header-flex">
       <div>
         <h2 class="text-xl font-bold">Support Tickets & Complaint Center</h2>
         <p class="text-sm text-muted">Track, assign, and resolve customer network issues with SLA compliance</p>
@@ -20,7 +20,7 @@ export async function renderTicketListView(container) {
     </div>
 
     <!-- Quick Status Tabs -->
-    <div class="flex gap-2" style="margin-bottom: 1rem; overflow-x: auto; padding-bottom: 4px;">
+    <div class="filter-tabs-row">
       <button class="btn btn-sm btn-secondary filter-tab" data-status="">All Tickets</button>
       <button class="btn btn-sm btn-outline filter-tab" data-status="NEW">New Complaints</button>
       <button class="btn btn-sm btn-outline filter-tab" data-status="ASSIGNED">Assigned</button>

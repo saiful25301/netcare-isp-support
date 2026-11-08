@@ -11,6 +11,15 @@ html, body {
   color: var(--color-text-main);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
+}
+
+img, svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
 
 a {
@@ -33,6 +42,7 @@ button {
 input, select, textarea {
   font-family: inherit;
   font-size: var(--font-size-sm);
+  max-width: 100%;
 }
 
 /* Utilities */
@@ -52,6 +62,7 @@ input, select, textarea {
 
 .flex { display: flex; }
 .flex-col { flex-direction: column; }
+.flex-wrap { flex-wrap: wrap; }
 .items-center { align-items: center; }
 .justify-between { justify-content: space-between; }
 .justify-center { justify-content: center; }
@@ -63,3 +74,53 @@ input, select, textarea {
 
 .hidden { display: none !important; }
 .w-full { width: 100%; }
+
+.text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Page Header Row with auto-wrap */
+.page-header-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+@media (max-width: 600px) {
+  .page-header-flex {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .page-header-flex > .btn,
+  .page-header-flex > div:last-child:not(:first-child) {
+    width: 100%;
+  }
+  .page-header-flex > div:last-child > .btn {
+    width: 100%;
+  }
+}
+
+/* Horizontal scrollable tab pills */
+.filter-tabs-row {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: 0.35rem;
+  margin-bottom: 1rem;
+}
+
+.filter-tabs-row::-webkit-scrollbar {
+  display: none;
+}
+
+.filter-tabs-row .btn {
+  flex-shrink: 0;
+}

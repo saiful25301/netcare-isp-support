@@ -30,7 +30,7 @@ export async function renderCustomerPortalView(container) {
           </div>
         </div>
 
-        <div class="grid grid-cols-4 gap-3" style="margin-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.15); padding-top: 1rem;">
+        <div class="customer-stats-grid">
           <div>
             <div class="text-xs" style="opacity: 0.8;">Subscribed Plan</div>
             <div class="text-lg font-bold">${custProfile.package_name || 'Broadband'}</div>
@@ -131,28 +131,28 @@ export async function renderCustomerPortalView(container) {
           </div>
           <div class="card-body">
             <!-- 4-Step Stepper -->
-            <div style="display: flex; justify-content: space-between; position: relative; margin: 1.5rem 0.5rem 1rem;">
-              <div style="position: absolute; top: 14px; left: 10%; right: 10%; height: 3px; background-color: var(--color-border); z-index: 1;"></div>
+            <div class="stepper-container">
+              <div class="stepper-track"></div>
               
-              <div style="text-align: center; z-index: 2;">
-                <div style="width: 30px; height: 30px; border-radius: 50%; background-color: ${stepIndex >= 1 ? 'var(--color-primary)' : 'var(--color-border)'}; color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; margin: 0 auto; font-size: 0.8rem;">1</div>
-                <div class="text-xs font-semibold" style="margin-top: 0.35rem;">Reported</div>
+              <div class="stepper-step">
+                <div class="stepper-circle" style="background-color: ${stepIndex >= 1 ? 'var(--color-primary)' : 'var(--color-border)'};">1</div>
+                <div class="stepper-label">Reported</div>
               </div>
 
-              <div style="text-align: center; z-index: 2;">
-                <div style="width: 30px; height: 30px; border-radius: 50%; background-color: ${stepIndex >= 2 ? 'var(--color-primary)' : 'var(--color-border)'}; color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; margin: 0 auto; font-size: 0.8rem;">2</div>
-                <div class="text-xs font-semibold" style="margin-top: 0.35rem;">Technician Assigned</div>
-                <div class="text-xs text-muted">${t.assigned_technician_name || ''}</div>
+              <div class="stepper-step">
+                <div class="stepper-circle" style="background-color: ${stepIndex >= 2 ? 'var(--color-primary)' : 'var(--color-border)'};">2</div>
+                <div class="stepper-label">Technician Assigned</div>
+                <div class="text-xs text-muted text-truncate">${t.assigned_technician_name || ''}</div>
               </div>
 
-              <div style="text-align: center; z-index: 2;">
-                <div style="width: 30px; height: 30px; border-radius: 50%; background-color: ${stepIndex >= 3 ? 'var(--color-primary)' : 'var(--color-border)'}; color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; margin: 0 auto; font-size: 0.8rem;">3</div>
-                <div class="text-xs font-semibold" style="margin-top: 0.35rem;">Diagnostics & Repair</div>
+              <div class="stepper-step">
+                <div class="stepper-circle" style="background-color: ${stepIndex >= 3 ? 'var(--color-primary)' : 'var(--color-border)'};">3</div>
+                <div class="stepper-label">Diagnostics & Repair</div>
               </div>
 
-              <div style="text-align: center; z-index: 2;">
-                <div style="width: 30px; height: 30px; border-radius: 50%; background-color: ${stepIndex >= 4 ? 'var(--color-success)' : 'var(--color-border)'}; color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; margin: 0 auto; font-size: 0.8rem;">✓</div>
-                <div class="text-xs font-semibold" style="margin-top: 0.35rem;">Resolved</div>
+              <div class="stepper-step">
+                <div class="stepper-circle" style="background-color: ${stepIndex >= 4 ? 'var(--color-success)' : 'var(--color-border)'};">✓</div>
+                <div class="stepper-label">Resolved</div>
               </div>
             </div>
           </div>
